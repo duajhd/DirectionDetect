@@ -1,0 +1,53 @@
+﻿<Window x:Class="DirectionDetection.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:DirectionDetection.Shared"
+        xmlns:local="clr-namespace:DirectionDetection"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Unloaded="MainWindow_Unloaded">
+    <Window.Resources>
+        <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"></converters:BoolToBrushConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Menu VerticalAlignment="Top">
+                <MenuItem Header="参数设置" x:Name="parametersetting" Click="parametersetting_Click" >
+                </MenuItem>
+                <MenuItem Header="标定" x:Name="calibration"></MenuItem>
+
+            </Menu>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Canvas x:Name="DotCanvas">
+                   
+                </Canvas>
+            </Grid>
+            <UniformGrid Rows="3" Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Width="40">行坐标</TextBlock>
+                    <TextBlock x:Name="rowss" VerticalAlignment="Center"  Width="100"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Width="40">列坐标</TextBlock>
+                    <TextBlock x:Name="colss" VerticalAlignment="Center"  Width="100"></TextBlock>
+                </StackPanel>
+                <Button Width="100" Click="Button_Click_1" x:Name="StartingBtn">
+                    启动
+                </Button>
+            </UniformGrid>
+
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="NLog" Version="5.4.0" />
+    <PackageReference Include="NModbus" Version="3.0.81" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.5" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EasyModbus">
+      <HintPath>bin\Debug\net8.0-windows\EasyModbus.dll</HintPath>
+    </Reference>
+    <Reference Include="halcondotnet">
+      <HintPath>bin\Debug\net8.0-windows\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="MvCameraControl.Net">
+      <HintPath>..\..\MVS\Development\DotNet\win64\MvCameraControl.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

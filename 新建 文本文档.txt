@@ -1,0 +1,66 @@
+struct PointF { public float x, y; }
+
+PointF[] points = ...; // 假设有 132 个点
+int rows = 6, cols = 22;
+PointF[,] grid = new PointF[rows, cols];
+
+// 1. 计算边界
+float minX = points.Min(p => p.x);
+float maxX = points.Max(p => p.x);
+float minY = points.Min(p => p.y);
+float maxY = points.Max(p => p.y);
+
+// 2. 每个格子宽高
+float cellWidth = (maxX - minX) / cols;
+float cellHeight = (maxY - minY) / rows;
+
+// 3. 将每个点映射进 grid[i,j]
+foreach (var p in points)
+{
+    int col = (int)((p.x - minX) / cellWidth);
+    int row = (int)((p.y - minY) / cellHeight);
+
+    // 边界保护
+    col = Math.Min(cols - 1, Math.Max(0, col));
+    row = Math.Min(rows - 1, Math.Max(0, row));
+
+    grid[row, col] = p;
+}
+
+
+public static int[,] MergeArraysHorizontalFlexible(int[,] left, int[,] right, bool insertLeft)
+{
+    int rowsLeft = left.GetLength(0);
+    int colsLeft = left.GetLength(1);
+    int rowsRight = right.GetLength(0);
+    int colsRight = right.GetLength(1);
+
+    // 确保行数相同
+    if (rowsLeft != rowsRight)
+        throw new ArgumentException("两个数组的行数必须相同");
+
+    int totalCols = colsLeft + colsRight;
+    int[,] result = new int[rowsLeft, totalCols];
+
+    for (int i = 0; i < rowsLeft; i++)
+    {
+        if (insertLeft)
+        {
+            // right 放在左边，left 放在右边
+            for (int j = 0; j < colsRight; j++)
+                result[i, j] = right[i, j];
+            for (int j = 0; j < colsLeft; j++)
+                result[i, j + colsRight] = left[i, j];
+        }
+        else
+        {
+            // left 放左边，right 放右边
+            for (int j = 0; j < colsLeft; j++)
+                result[i, j] = left[i, j];
+            for (int j = 0; j < colsRight; j++)
+                result[i, j + colsLeft] = right[i, j];
+        }
+    }
+
+    return result;
+}

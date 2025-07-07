@@ -1,0 +1,85 @@
+read_image(img,'微信图片_20250603102652_72.jpg')
+get_image_size(img,Width,Height)
+create_metrology_model(MetrologyID)
+set_metrology_model_image_size (MetrologyID, Width, Height)
+
+
+threshold(img,reg,0,170)
+closing_circle(reg,connectedReg,10)
+connection(connectedReg,connectedReg)
+select_shape (connectedReg, SelectedRegions, 'area', 'and', 3000, 999999)
+smallest_rectangle2(SelectedRegions,Row,Column,phi,Length1,Length2)
+
+*右上抓边偏移
+OffsetRowBegin:= -300
+OffsetColumnBegin:=70
+OffsetRowEnd:=-150
+OffsetColumnEnd:=70
+
+*左上抓边偏移
+OffsetLeftTopRowBegin:= -430
+OffsetLeftTopColumnBegin:=-130
+OffsetLeftTopRowEnd:=-420
+OffsetLeftTopColumnEnd:=-85
+
+*左下抓边偏移
+OffsetLeftBottomRowBegin:= 300
+OffsetLeftBottomColumnBegin:=-70
+OffsetLeftBottomRowEnd:=150
+OffsetLeftBottomColumnEnd:=-70
+
+*右下抓边偏移
+OffsetRightBottomRowBegin:= 427
+OffsetRightBottomColumnBegin:=100
+OffsetRightBottomRowEnd:=437
+OffsetRightBottomColumnEnd:=135
+
+
+*检测线偏移
+OffsetLineRowBegin:=-30
+OffsetLineColumnBegin:=-108
+OffsetLineRowEnd:=50
+OffsetLineColumnEnd:=-108
+
+add_metrology_object_line_measure(MetrologyID,Row+OffsetRowBegin,Column+OffsetColumnBegin,Row+OffsetRowEnd,OffsetColumnEnd+Column,30, 5, 2, 60, [], [], Index)
+get_metrology_object_measures (Contours, MetrologyID, 'all', 'negative', MeasureRow, MeasureColumn)
+apply_metrology_model (img, MetrologyID)
+get_metrology_object_result (MetrologyID, 'all', 'all', 'result_type', 'all_param', Parameter)
+get_metrology_object_result_contour (RightTopContour1, MetrologyID, 'all', 'all',1)
+fit_line_contour_xld (RightTopContour1, 'tukey', -1, 0, 5, 2, RightTopContourRow1, RightTopContourCol1, RightTopContourRow2, RightTopContourCol2, Nr, Nc, Dist)
+
+add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftTopRowBegin,Column+OffsetLeftTopColumnBegin,Row+OffsetLeftTopRowEnd,OffsetLeftTopColumnEnd+Column,40, 5, 2, 35, [], [], Index2)
+get_metrology_object_measures (Contours, MetrologyID, Index2, 'negative', MeasureRow, MeasureColumn)
+apply_metrology_model (img, MetrologyID)
+get_metrology_object_result (MetrologyID, Index2, 'all', 'result_type', 'all_param', Parameter)
+get_metrology_object_result_contour (LeftTopContour1, MetrologyID, Index2, 'all',1)
+fit_line_contour_xld (LeftTopContour1, 'tukey', -1, 0, 5, 2, LeftTopContourRow1, LeftTopContourCol1, LeftTopContourRow2, LeftTopContourCol2, Nr, Nc, Dist)
+
+add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftBottomRowBegin,Column+OffsetLeftBottomColumnBegin,Row+OffsetLeftBottomRowEnd,OffsetLeftBottomColumnEnd+Column,40, 5, 2, 60, [], [], Index3)
+get_metrology_object_measures (Contours, MetrologyID, Index3, 'negative', MeasureRow, MeasureColumn)
+apply_metrology_model (img, MetrologyID)
+get_metrology_object_result (MetrologyID, Index3, 'all', 'result_type', 'all_param', Parameter)
+get_metrology_object_result_contour (LeftBottomContour1, MetrologyID, Index3, 'all',1)
+fit_line_contour_xld (LeftBottomContour1, 'tukey', -1, 0, 5, 2, LeftBottomContourRow1, LeftBottomContourCol1, LeftBottomContourRow2, LeftBottomContourCol2, Nr, Nc, Dist)
+
+add_metrology_object_line_measure(MetrologyID,Row+OffsetRightBottomRowBegin,Column+OffsetRightBottomColumnBegin,Row+OffsetRightBottomRowEnd,OffsetRightBottomColumnEnd+Column,40, 5, 2, 60, [], [], Index4)
+get_metrology_object_measures (Contours, MetrologyID, Index4, 'negative', MeasureRow, MeasureColumn)
+apply_metrology_model (img, MetrologyID)
+get_metrology_object_result (MetrologyID, Index4, 'all', 'result_type', 'all_param', Parameter)
+get_metrology_object_result_contour (RightBottomContour1, MetrologyID, Index4, 'all',1)
+fit_line_contour_xld (RightBottomContour1, 'tukey', -1, 0, 5, 2, RightBottomContourRow1, RightBottomContourCol1, RightBottomContourRow2, RightBottomContourCol2, Nr, Nc, Dist)
+
+Row1_mid:=(RightTopContourRow1+LeftBottomContourRow1)/2
+Column1_mid:=(RightTopContourCol1+LeftBottomContourCol1)/2
+
+Row2_mid:=(LeftTopContourRow1+RightBottomContourRow1)/2
+Column2_mid:=(LeftTopContourCol1+RightBottomContourCol1)/2
+
+gen_region_line(line,Row1_mid+OffsetLineRowBegin,Column1_mid+OffsetLineColumnBegin,Row1_mid+OffsetLineRowEnd,Column1_mid+OffsetLineColumnEnd)
+
+reduce_domain(img,line,reducedImg)
+intensity(line,img, Mean, Deviation)
+
+* 遍历每一个轮廓
+
+
