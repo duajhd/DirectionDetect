@@ -3,7 +3,7 @@
 <procedure name="main">
 <interface/>
 <body>
-<l>read_image(img,'Image_20250707103718793.bmp')</l>
+<l>read_image(img,'Image_20250707104206216.bmp')</l>
 <l>get_image_size(img,Width,Height)</l>
 <l>create_metrology_model(MetrologyID)</l>
 <l>set_metrology_model_image_size (MetrologyID, Width, Height)</l>
@@ -12,7 +12,7 @@
 <l>threshold(img,reg,0,170)</l>
 <l>closing_circle(reg,connectedReg,10)</l>
 <l>connection(connectedReg,connectedReg)</l>
-<l>select_shape (connectedReg, SelectedRegions, ['area','anisometry','rb','ra'], 'and', [90000,3,150,600], [99999999,5,250,900])</l>
+<l>select_shape (connectedReg, SelectedRegions, ['area','anisometry','rb','ra'], 'and', [3000,3,150,600], [99999999,6,250,900])</l>
 <c></c>
 <c></c>
 <l>smallest_rectangle2(SelectedRegions,Row,Column,phi,Length1,Length2)</l>

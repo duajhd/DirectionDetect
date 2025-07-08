@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\camera\\mvcamera2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:camera\\mvcamera2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\shared\\hikcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -130,14 +130,14 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "D:\\zhijain\\DirectionDetection\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAIcDAAAAAAAAAAAqwCYEAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAuwJQAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T08:21:04.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MainWindowViewModel.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\MainWindowViewModel.cs",
               "RelativeDocumentMoniker": "MainWindowViewModel.cs",
@@ -161,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MVCamera2.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\Camera\\MVCamera2.cs",
               "RelativeDocumentMoniker": "Camera\\MVCamera2.cs",
@@ -185,14 +185,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
               "ToolTip": "D:\\zhijain\\DirectionDetection\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-20T08:21:11.962Z"
+              "WhenOpened": "2025-05-20T08:21:11.962Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -440,7 +441,8 @@
               "ToolTip": "D:\\zhijain\\DirectionDetection\\App.xaml",
               "RelativeToolTip": "App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-21T00:07:15.003Z"
+              "WhenOpened": "2025-05-21T00:07:15.003Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

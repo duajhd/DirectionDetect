@@ -69,7 +69,7 @@ namespace DirectionDetection
         private int columnStep = 0;
 
         //当前总位移次数  totalMovingNum%RowSteps == 0表明进入新行totalMovingNum/RowSteps 表明是第几行，行号是偶数从左向右合并；奇数则从右向左合并
-        private int totalMovingNum = 1;
+        private int totalMovingNum = 0;
         // Stack for temporary objects 
         HObject[] OTemp = new HObject[20];
 
@@ -137,11 +137,17 @@ namespace DirectionDetection
                 isRunning = false;
             }
 
-            //HikCamera vamer = new HikCamera("DA6063679",ImageWidth,ImageHeight);
-            //vamer.HikInit();
-            //vamer.HikAcqImage(38000, m_pBufForDriver);
-            //vamer.HikClose();
+            HikCamera vamer = new HikCamera("DA6063679", ImageWidth, ImageHeight);
+            vamer.HikInit();
+            vamer.HikAcqImage(38000, m_pBufForDriver);
+            vamer.HikClose();
 
+
+            totalMovingNum += 1;
+             HOperatorSet.GenImage1(out ho_img, "byte", ImageWidth, ImageHeight, m_pBufForDriver);
+          //  HOperatorSet.ReadImage(out ho_img, "Image_20250707093946088.bmp");
+            HOperatorSet.WriteImage(ho_img,"bmp",0,"test.bmp");
+       
 
         }
 
@@ -166,6 +172,19 @@ namespace DirectionDetection
 
           
             m_pBufForDriver = Marshal.AllocHGlobal(Convert.ToInt32(ImageWidth * ImageHeight));
+
+            HOperatorSet.GenEmptyObj(out ho_img);
+            HOperatorSet.GenEmptyObj(out ho_reg);
+            HOperatorSet.GenEmptyObj(out ho_connectedReg);
+            HOperatorSet.GenEmptyObj(out ho_SelectedRegions);
+            HOperatorSet.GenEmptyObj(out ho_Contours);
+            HOperatorSet.GenEmptyObj(out ho_RightTopContour1);
+            HOperatorSet.GenEmptyObj(out ho_LeftTopContour1);
+            HOperatorSet.GenEmptyObj(out ho_LeftBottomContour1);
+            HOperatorSet.GenEmptyObj(out ho_RightBottomContour1);
+            HOperatorSet.GenEmptyObj(out ho_Crosses2);
+            HOperatorSet.GenEmptyObj(out ho_line);
+            HOperatorSet.GenEmptyObj(out ho_reducedImg);
 
             //初始化相机队列
 
@@ -779,9 +798,9 @@ namespace DirectionDetection
                     }
                     ho_SelectedRegions.Dispose();
                     HOperatorSet.SelectShape(ho_connectedReg, out ho_SelectedRegions, (((new HTuple("area")).TupleConcat(
-                        "anisometry")).TupleConcat("rb")).TupleConcat("ra"), "and", (((new HTuple(90000)).TupleConcat(
+                        "anisometry")).TupleConcat("rb")).TupleConcat("ra"), "and", (((new HTuple(3000)).TupleConcat(
                         3)).TupleConcat(150)).TupleConcat(600), (((new HTuple(99999999)).TupleConcat(
-                        5)).TupleConcat(250)).TupleConcat(900));
+                        6)).TupleConcat(250)).TupleConcat(900));
 
 
                     hv_Row.Dispose(); hv_Column.Dispose(); hv_phi.Dispose(); hv_Length1.Dispose(); hv_Length2.Dispose();
