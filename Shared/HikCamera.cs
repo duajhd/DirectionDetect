@@ -124,6 +124,8 @@ namespace DirectionDetection.Shared
             nRet = m_pMyCamera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
             nRet = m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);
             nRet =  m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
+            nRet = m_pMyCamera.MV_CC_SetBoolValue_NET("ReverseX",true);
+            nRet = m_pMyCamera.MV_CC_SetBoolValue_NET("ReverseY", true);
             nRet = m_pMyCamera.MV_CC_SetIntValue_NET("Width", Convert.ToUInt32(m_width));
             nRet = m_pMyCamera.MV_CC_SetIntValue_NET("Height", Convert.ToUInt32(m_height));
             nRet = m_pMyCamera.MV_CC_SetIntValue_NET("OffsetX", Convert.ToUInt32(nOffsetX));

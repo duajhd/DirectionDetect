@@ -118,15 +118,18 @@ namespace DirectionDetection.Camera
 
             // ch:设置采集连续模式 | en:Set Continues Aquisition Mode
             //      m_pMyCamera.MV_CC_SetEnumValue_NET("AcquisitionMode", 2);// ch:工作在连续模式 | en:Acquisition On Continuous Mode
-            m_pMyCamera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
-            m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);    // ch:触发模式 | en:Continuous
-            m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
-            m_pMyCamera.MV_CC_SetIntValue_NET("Width", m_width);
-            m_pMyCamera.MV_CC_SetIntValue_NET("Height", m_height);
-            m_pMyCamera.MV_CC_SetIntValue_NET("OffsetX", nOffsetX);
-            m_pMyCamera.MV_CC_SetIntValue_NET("OffsetY", nOffsetY);
-            m_pMyCamera.MV_CC_SetBoolValue_NET("PacketUnorderSupport", true);
-            m_pMyCamera.MV_CC_SetBoolValue_NET("AcquisitionFrameRateEnable", false);
+            nRet = m_pMyCamera.MV_CC_SetEnumValue_NET("AcquisitionMode", (uint)MyCamera.MV_CAM_ACQUISITION_MODE.MV_ACQ_MODE_CONTINUOUS);
+            nRet = m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerMode", (uint)MyCamera.MV_CAM_TRIGGER_MODE.MV_TRIGGER_MODE_ON);    // ch:触发模式 | en:Continuous
+            nRet = m_pMyCamera.MV_CC_SetEnumValue_NET("TriggerSource", (uint)MyCamera.MV_CAM_TRIGGER_SOURCE.MV_TRIGGER_SOURCE_SOFTWARE);
+            nRet = m_pMyCamera.MV_CC_SetBoolValue_NET("ReverseX", true);
+            nRet = m_pMyCamera.MV_CC_SetBoolValue_NET("ReverseY", true);
+            nRet = m_pMyCamera.MV_CC_SetIntValue_NET("Width", m_width);
+            nRet = m_pMyCamera.MV_CC_SetIntValue_NET("Height", m_height);
+            nRet = m_pMyCamera.MV_CC_SetIntValue_NET("OffsetX", nOffsetX);
+            nRet = m_pMyCamera.MV_CC_SetIntValue_NET("OffsetY", nOffsetY);
+            nRet = m_pMyCamera.MV_CC_SetBoolValue_NET("PacketUnorderSupport", true);
+            nRet = m_pMyCamera.MV_CC_SetBoolValue_NET("AcquisitionFrameRateEnable", false);
+            nRet = m_pMyCamera.MV_CC_SetFloatValue_NET("ExposureTime", 39000);
             uint nPacketSize = (uint)m_pMyCamera.MV_CC_GetOptimalPacketSize_NET();
             m_pMyCamera.MV_CC_SetIntValue_NET("GevSCPSPacketSize", nPacketSize);
             m_pMyCamera.MV_CC_StartGrabbing_NET();
@@ -153,7 +156,55 @@ namespace DirectionDetection.Camera
             return true;
         }
 
-        public int  HikAcqImage(uint exposureTime,IntPtr pBufForDriver)
+        public int  HikAcqImage( IntPtr pBufForDriver)
+        {
+            //Bitmap m_bitmap;
+            //m_bitmap = new Bitmap(Convert.ToInt32(m_width), Convert.ToInt32(m_height), System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+            //ColorPalette palette = m_bitmap.Palette;
+            //for (int i = 0; i < 256; i++)
+            //{
+            //    palette.Entries[i] = System.Drawing.Color.FromArgb(255, i, i, i);
+            //}
+            //m_bitmap.Palette = palette;
+            MyCamera.MV_FRAME_OUT stFrameInfo = new MyCamera.MV_FRAME_OUT();
+
+            //if (exposureTime <= 80)
+            //{
+            //    exposureTime = 2000;
+            //}
+
+
+
+
+            int ret = m_pMyCamera.MV_CC_SetCommandValue_NET("TriggerSoftware");
+            if (MyCamera.MV_OK != ret)
+            {
+                return ret;
+            }
+
+
+            //按顺序执行MV_CC_ClearImageBuffer_NET和MV_CC_GetImageBuffer_NET很重要
+            m_pMyCamera.MV_CC_ClearImageBuffer_NET();
+             ret = m_pMyCamera.MV_CC_GetImageBuffer_NET(ref stFrameInfo, 20000);
+          
+            //
+            if (MyCamera.MV_OK == ret)
+            {
+                //BitmapData bmpData = m_bitmap.LockBits(new Rectangle(0, 0, Convert.ToInt32(m_width), Convert.ToInt32(m_height)),
+                //        ImageLockMode.WriteOnly,
+                //        System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+                //CopyMemory(bmpData.Scan0, stFrameInfo.pBufAddr, stFrameInfo.stFrameInfo.nFrameLen);
+                CopyMemory(pBufForDriver, stFrameInfo.pBufAddr, stFrameInfo.stFrameInfo.nFrameLen);
+              //  m_bitmap.Save("test.bmp");
+                m_pMyCamera.MV_CC_FreeImageBuffer_NET(ref stFrameInfo);
+
+            }
+          
+
+            return ret;
+        }
+
+        public int HikAcqImage(uint exposureTime, HObject himage)
         {
             //Bitmap m_bitmap;
             //m_bitmap = new Bitmap(Convert.ToInt32(m_width), Convert.ToInt32(m_height), System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
@@ -169,11 +220,11 @@ namespace DirectionDetection.Camera
             {
                 exposureTime = 2000;
             }
-           
 
-            int ret  =  m_pMyCamera.MV_CC_SetFloatValue_NET("ExposureTime", exposureTime);
 
-            ret  = m_pMyCamera.MV_CC_SetCommandValue_NET("TriggerSoftware");
+            int ret = m_pMyCamera.MV_CC_SetFloatValue_NET("ExposureTime", exposureTime);
+
+            ret = m_pMyCamera.MV_CC_SetCommandValue_NET("TriggerSoftware");
             if (MyCamera.MV_OK != ret)
             {
                 return ret;
@@ -189,12 +240,12 @@ namespace DirectionDetection.Camera
                 //        ImageLockMode.WriteOnly,
                 //        System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
                 //CopyMemory(bmpData.Scan0, stFrameInfo.pBufAddr, stFrameInfo.stFrameInfo.nFrameLen);
-                CopyMemory(pBufForDriver, stFrameInfo.pBufAddr, stFrameInfo.stFrameInfo.nFrameLen);
-              //  m_bitmap.Save("test.bmp");
+                HOperatorSet.GenImage1(out himage, "byte", m_width, m_height, stFrameInfo.pBufAddr);
+                //  m_bitmap.Save("test.bmp");
                 m_pMyCamera.MV_CC_FreeImageBuffer_NET(ref stFrameInfo);
 
             }
-          
+
 
             return ret;
         }

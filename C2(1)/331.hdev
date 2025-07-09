@@ -3,7 +3,8 @@
 <procedure name="main">
 <interface/>
 <body>
-<l>read_image(img,'Image_20250707104206216.bmp')</l>
+<l>read_image(img,'Image_20250709154809064.bmp')</l>
+<c></c>
 <l>get_image_size(img,Width,Height)</l>
 <l>create_metrology_model(MetrologyID)</l>
 <l>set_metrology_model_image_size (MetrologyID, Width, Height)</l>
@@ -26,35 +27,35 @@
 <l>OffsetColumnEnd:=95</l>
 <c></c>
 <c>*左上抓边偏移</c>
-<l>OffsetLeftTopRowBegin:= -90</l>
-<l>OffsetLeftTopColumnBegin:=-160</l>
-<l>OffsetLeftTopRowEnd:=-90</l>
-<l>OffsetLeftTopColumnEnd:=-120</l>
+<l>OffsetLeftTopRowBegin:= -80</l>
+<l>OffsetLeftTopColumnBegin:=-155</l>
+<l>OffsetLeftTopRowEnd:=-80</l>
+<l>OffsetLeftTopColumnEnd:=-115</l>
 <c></c>
 <c>*左下抓边偏移</c>
 <l>OffsetLeftBottomRowBegin:= 300</l>
-<l>OffsetLeftBottomColumnBegin:=-100</l>
+<l>OffsetLeftBottomColumnBegin:=-90</l>
 <l>OffsetLeftBottomRowEnd:=150</l>
-<l>OffsetLeftBottomColumnEnd:=-100</l>
+<l>OffsetLeftBottomColumnEnd:=-90</l>
 <c></c>
 <c>*右下抓边偏移</c>
-<l>OffsetRightBottomRowBegin:= 97</l>
-<l>OffsetRightBottomColumnBegin:=120</l>
-<l>OffsetRightBottomRowEnd:=97</l>
+<l>OffsetRightBottomRowBegin:= 80</l>
+<l>OffsetRightBottomColumnBegin:=115</l>
+<l>OffsetRightBottomRowEnd:=80</l>
 <l>OffsetRightBottomColumnEnd:=155</l>
 <c></c>
 <c></c>
 <c>*检测线偏移</c>
 <l>OffsetLineRowBegin:=-30</l>
-<l>OffsetLineColumnBegin:=-126.02</l>
+<l>OffsetLineColumnBegin:=129.06</l>
 <l>OffsetLineRowEnd:=40</l>
-<l>OffsetLineColumnEnd:=-126.02</l>
+<l>OffsetLineColumnEnd:=129.06</l>
 <c></c>
-<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRowBegin,Column+OffsetColumnBegin,Row+OffsetRowEnd,OffsetColumnEnd+Column,40, 5, 2, 60, [], [], Index)</l>
-<l>get_metrology_object_measures (Contours, MetrologyID, 'all', 'negative', MeasureRow, MeasureColumn)</l>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRowBegin,Column+OffsetColumnBegin,Row+OffsetRowEnd,OffsetColumnEnd+Column,40, 5, 2, 60, [], [], Index1)</l>
+<l>get_metrology_object_measures (Contours, MetrologyID, Index1, 'negative', MeasureRow, MeasureColumn)</l>
 <l>apply_metrology_model (img, MetrologyID)</l>
-<l>get_metrology_object_result (MetrologyID, 'all', 'all', 'result_type', 'all_param', Parameter)</l>
-<l>get_metrology_object_result_contour (RightTopContour1, MetrologyID, 'all', 'all',1)</l>
+<l>get_metrology_object_result (MetrologyID, Index1, 'all', 'result_type', 'all_param', Parameter)</l>
+<l>get_metrology_object_result_contour (RightTopContour1, MetrologyID, Index1, 'all',1)</l>
 <l>fit_line_contour_xld (RightTopContour1, 'tukey', -1, 0, 5, 2, RightTopContourRow1, RightTopContourCol1, RightTopContourRow2, RightTopContourCol2, Nr, Nc, Dist)</l>
 <c>*[208, 137, 213, 90], [49, 327, 139, 307], [100, 201, 214, 89], [82, 318, 56, 375]</c>
 <l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftTopRowBegin,Column+OffsetLeftTopColumnBegin,Row+OffsetLeftTopRowEnd,OffsetLeftTopColumnEnd+Column,40, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index2)</l>

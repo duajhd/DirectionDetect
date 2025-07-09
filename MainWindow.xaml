@@ -29,9 +29,14 @@
                 <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Canvas x:Name="DotCanvas">
-                   
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="200"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Canvas  Grid.Row="0" x:Name="DotCanvas">
+
                 </Canvas>
+               
             </Grid>
             <UniformGrid Rows="3" Grid.Column="1">
                 <StackPanel Orientation="Horizontal">
@@ -42,7 +47,7 @@
                     <TextBlock VerticalAlignment="Center" Width="40">列坐标</TextBlock>
                     <TextBlock x:Name="colss" VerticalAlignment="Center"  Width="100"></TextBlock>
                 </StackPanel>
-                <Button Width="100" Click="Button_Click_1" x:Name="StartingBtn">
+                <Button Width="100" Click="Button_Click_1" x:Name="StartingBtn" Cursor="Hand">
                     启动
                 </Button>
             </UniformGrid>
