@@ -3,7 +3,7 @@
 <procedure name="main">
 <interface/>
 <body>
-<l>read_image(img,'Image_20250709154809064.bmp')</l>
+<l>read_image(img,'error.bmp')</l>
 <c></c>
 <l>get_image_size(img,Width,Height)</l>
 <l>create_metrology_model(MetrologyID)</l>
@@ -58,7 +58,7 @@
 <l>get_metrology_object_result_contour (RightTopContour1, MetrologyID, Index1, 'all',1)</l>
 <l>fit_line_contour_xld (RightTopContour1, 'tukey', -1, 0, 5, 2, RightTopContourRow1, RightTopContourCol1, RightTopContourRow2, RightTopContourCol2, Nr, Nc, Dist)</l>
 <c>*[208, 137, 213, 90], [49, 327, 139, 307], [100, 201, 214, 89], [82, 318, 56, 375]</c>
-<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftTopRowBegin,Column+OffsetLeftTopColumnBegin,Row+OffsetLeftTopRowEnd,OffsetLeftTopColumnEnd+Column,40, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index2)</l>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftTopRowBegin,Column+OffsetLeftTopColumnBegin,Row+OffsetLeftTopRowEnd,OffsetLeftTopColumnEnd+Column,90, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index2)</l>
 <c></c>
 <l>*add_metrology_object_line_measure(MetrologyID,213,139,214,56,90, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index2)</l>
 <l>get_metrology_object_measures (Contours, MetrologyID, Index2, 'negative', MeasureRow, MeasureColumn)</l>
@@ -74,7 +74,7 @@
 <l>get_metrology_object_result_contour (LeftBottomContour1, MetrologyID, Index3, 'all',1)</l>
 <l>fit_line_contour_xld (LeftBottomContour1, 'tukey', -1, 0, 5, 2, LeftBottomContourRow1, LeftBottomContourCol1, LeftBottomContourRow2, LeftBottomContourCol2, Nr, Nc, Dist)</l>
 <c></c>
-<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRightBottomRowBegin,Column+OffsetRightBottomColumnBegin,Row+OffsetRightBottomRowEnd,OffsetRightBottomColumnEnd+Column,40, 5, 2, 60, [], [], Index4)</l>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRightBottomRowBegin,Column+OffsetRightBottomColumnBegin,Row+OffsetRightBottomRowEnd,OffsetRightBottomColumnEnd+Column,90, 5, 2, 60, [], [], Index4)</l>
 <l>get_metrology_object_measures (Contours, MetrologyID, Index4, 'negative', MeasureRow, MeasureColumn)</l>
 <l>apply_metrology_model (img, MetrologyID)</l>
 <l>get_metrology_object_result (MetrologyID, Index4, 'all', 'result_type', 'all_param', Parameter)</l>

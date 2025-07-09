@@ -830,7 +830,7 @@ namespace DirectionDetection
                             hv_Index2.Dispose();
                             HOperatorSet.AddMetrologyObjectLineMeasure(hv_MetrologyID, hv_Row + hv_OffsetLeftTopRowBegin,
                                 hv_Column + hv_OffsetLeftTopColumnBegin, hv_Row + hv_OffsetLeftTopRowEnd, hv_OffsetLeftTopColumnEnd + hv_Column,
-                                40, 5, 1, 30, (new HTuple("measure_transition")).TupleConcat("min_score"),
+                                90, 5, 1, 30, (new HTuple("measure_transition")).TupleConcat("min_score"),
                                 (new HTuple("negative")).TupleConcat(0.5), out hv_Index2);
                         }
 
@@ -878,7 +878,7 @@ namespace DirectionDetection
                             hv_Index4.Dispose();
                             HOperatorSet.AddMetrologyObjectLineMeasure(hv_MetrologyID, hv_Row + hv_OffsetRightBottomRowBegin,
                                 hv_Column + hv_OffsetRightBottomColumnBegin, hv_Row + hv_OffsetRightBottomRowEnd,
-                                hv_OffsetRightBottomColumnEnd + hv_Column, 40, 5, 2, 60, new HTuple(), new HTuple(),
+                                hv_OffsetRightBottomColumnEnd + hv_Column, 90, 5, 2, 60, new HTuple(), new HTuple(),
                                 out hv_Index4);
                         }
                         ho_Contours.Dispose(); hv_MeasureRow.Dispose(); hv_MeasureColumn.Dispose();
@@ -1078,8 +1078,10 @@ namespace DirectionDetection
                                     Application.Current.Dispatcher.Invoke(() =>
                                     {
                                         DrawDots();
+                                        
                                     });
-                                 
+                                    totalMovingNum = 0;
+
                                 }
                             }
                             else
@@ -1125,12 +1127,12 @@ namespace DirectionDetection
                     catch(Exception ex)
                     {
                         cameraUp.HikClose();
-                        // MessageBox.Show(ex.Message);
+                        MessageBox.Show(ex.Message);
                         string filePath = @"example.txt";
                         
 
                         // 写入内容，如果文件不存在则创建，已存在则覆盖
-                        File.WriteAllText(filePath, $"hv_RightTopContourRow1长度{hv_RightTopContourRow1.DArr.Length}\r\nhv_LeftBottomContourRow1长度{hv_LeftBottomContourRow1.DArr.Length}\r\nhv_RightTopContourCol1长度{hv_RightTopContourCol1.DArr.Length}\r\nhv_LeftBottomContourCol1长度{hv_LeftBottomContourCol1.DArr.Length}\r\nhv_LeftTopContourRow1长度{hv_LeftTopContourRow1.DArr.Length}\r\nhv_RightBottomContourRow1长度{hv_RightBottomContourRow1.DArr.Length}\r\nhv_LeftTopContourCol1长度{hv_LeftTopContourCol1.DArr.Length}\r\nhv_RightBottomContourCol1长度{hv_RightBottomContourCol1.DArr}");
+                        File.WriteAllText(filePath, $"hv_RightTopContourRow1长度{hv_RightTopContourRow1.DArr.Length}\r\nhv_LeftBottomContourRow1长度{hv_LeftBottomContourRow1.DArr.Length}\r\nhv_RightTopContourCol1长度{hv_RightTopContourCol1.DArr.Length}\r\nhv_LeftBottomContourCol1长度{hv_LeftBottomContourCol1.DArr.Length}\r\nhv_LeftTopContourRow1长度{hv_LeftTopContourRow1.DArr.Length}\r\nhv_RightBottomContourRow1长度{hv_RightBottomContourRow1.DArr.Length}\r\nhv_LeftTopContourCol1长度{hv_LeftTopContourCol1.DArr.Length}\r\nhv_RightBottomContourCol1长度{hv_RightBottomContourCol1.DArr.Length}");
                         //   File.WriteAllText(filePath, $"");
 
                         HOperatorSet.WriteImage(ho_img, "bmp", 0, "error.bmp");
