@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DirectionDetection")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2497eff0d311616ecb86c0b393e4f5b94ad32ea2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+509ceacf90064d5db637617e82aba53f46d7159b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DirectionDetection")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DirectionDetection")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -78,6 +78,10 @@ namespace DirectionDetection
         private bool isUpdate = false;
         private object obj = new object();
         public IntPtr m_pBufForDriver = IntPtr.Zero;
+
+        private bool isInitialized = false;
+
+      
         //halcon相关
         // Local iconic variables 
 
@@ -112,6 +116,83 @@ namespace DirectionDetection
         HTuple hv_RightTopContourRow1 = new HTuple(), hv_RightTopContourCol1 = new HTuple();
         HTuple hv_RightTopContourRow2 = new HTuple(), hv_RightTopContourCol2 = new HTuple();
         HTuple hv_Nr = new HTuple(), hv_Nc = new HTuple(), hv_Dist = new HTuple();
+
+        //复位
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            client.WriteSingleCoil(0,true);
+        }
+
+        //初始化
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //如果未初始化，初始化
+            if (!isInitialized)
+            {
+                try
+                {
+                    //
+                    client.WriteSingleRegister(302, 1);
+                    isInitialized = true;
+                    StartingBtn.IsEnabled = true;
+
+                    InitialBtn.Content = "停止";
+
+                    //启动线程部分
+                    isRunning = true;
+                    cameraUp_process = new Thread(work_flow_1);
+                    process1 = new Thread(process);
+
+                    cameraUp_process.Start();
+                    process1.Start();
+                }
+                catch
+                {
+                    StartingBtn.IsEnabled = false;
+                    isInitialized = false;
+                    cameraUp.HikClose();
+                }
+            }
+            //
+            else
+            {
+                //已初始化，直接返回不处理
+                isRunning = false;
+                isInitialized = false;
+               
+                cameraUp.HikClose();
+            }
+
+
+            //if (!isRunning)
+            //{
+            //    try
+            //    {
+            //        StartingBtn.Content = "停止";
+
+
+
+            //        isRunning = true;
+
+            //    }
+            //    catch
+            //    {
+            //        isRunning = false;
+            //    }
+
+
+            //}
+            //else
+            //{
+            //    StartingBtn.Content = "开始";
+            //    client.WriteSingleRegister(300, 0);
+
+            //   // cameraUp.HikClose();
+            //}
+
+
+        }
+
         HTuple hv_Index2 = new HTuple(), hv_LeftTopContourRow1 = new HTuple();
         HTuple hv_LeftTopContourCol1 = new HTuple(), hv_LeftTopContourRow2 = new HTuple();
         HTuple hv_LeftTopContourCol2 = new HTuple(), hv_Index3 = new HTuple();
@@ -123,25 +204,37 @@ namespace DirectionDetection
         HTuple hv_Column1_mid = new HTuple(), hv_Row2_mid = new HTuple();
         HTuple hv_Column2_mid = new HTuple(), hv_Mean = new HTuple();
         HTuple hv_Deviation = new HTuple();
+
+        //点击开始执行
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (!isRunning)
-            {
-                StartingBtn.Content = "停止";
-                isRunning = true;
-                cameraUp_process = new Thread(work_flow_1);
-                process1 = new Thread(process);
+            client.WriteSingleRegister(300, 1);
 
-                cameraUp_process.Start();
-                process1.Start();
+            //if (!isRunning)
+            //{
+            //    try
+            //    {
+            //        StartingBtn.Content = "停止";
 
-            }
-            else
-            {
-                StartingBtn.Content = "开始";
-                isRunning = false;
-                cameraUp.HikClose();
-            }
+
+
+            //        isRunning = true;
+
+            //    }
+            //    catch
+            //    {
+            //        isRunning = false;
+            //    }
+
+
+            //}
+            //else
+            //{
+            //    StartingBtn.Content = "开始";
+            //    client.WriteSingleRegister(300, 0);
+
+            //   // cameraUp.HikClose();
+            //}
 
             //HikCamera vamer = new HikCamera("DA6063679", ImageWidth, ImageHeight);
             //vamer.HikInit();
@@ -149,15 +242,18 @@ namespace DirectionDetection
             //vamer.HikClose();
 
 
-          //  totalMovingNum += 1;
-          //   HOperatorSet.GenImage1(out ho_img, "byte", ImageWidth, ImageHeight, m_pBufForDriver);
-          //  HOperatorSet.ReadImage(out ho_img, "Image_20250707093946088.bmp");
-           // HOperatorSet.WriteImage(ho_img,"bmp",0,"test.bmp");
-       
+            //  totalMovingNum += 1;
+            //   HOperatorSet.GenImage1(out ho_img, "byte", ImageWidth, ImageHeight, m_pBufForDriver);
+            //  HOperatorSet.ReadImage(out ho_img, "Image_20250707093946088.bmp");
+            // HOperatorSet.WriteImage(ho_img,"bmp",0,"test.bmp");
+
 
         }
 
+        private void RunningPLC()
+        {
 
+        }
 
 
 
@@ -259,9 +355,11 @@ namespace DirectionDetection
             RowSteps = (ProductRows + RowStepNum - 1) / RowStepNum;
             ColSteps = (ProductCols + ColStepNum - 1) / ColStepNum;
 
+        
+
             //totalResult = new Point2D[ProductRows, ProductCols];
 
-           
+
         }
 
         private void DrawDots()
@@ -758,6 +856,8 @@ namespace DirectionDetection
             hv_Column2_mid.Dispose();
             hv_Mean.Dispose();
             hv_Deviation.Dispose();
+
+          
         }
 
         private void process()
@@ -808,7 +908,7 @@ namespace DirectionDetection
                             hv_Index1.Dispose();
                             HOperatorSet.AddMetrologyObjectLineMeasure(hv_MetrologyID, hv_Row + hv_OffsetRowBegin,
                                 hv_Column + hv_OffsetColumnBegin, hv_Row + hv_OffsetRowEnd, hv_OffsetColumnEnd + hv_Column,
-                                40, 5, 2, 60, new HTuple(), new HTuple(), out hv_Index1);
+                                70, 5, 2, 60, new HTuple(), new HTuple(), out hv_Index1);
                         }
                         ho_Contours.Dispose(); hv_MeasureRow.Dispose(); hv_MeasureColumn.Dispose();
                         HOperatorSet.GetMetrologyObjectMeasures(out ho_Contours, hv_MetrologyID, hv_Index1,
@@ -855,7 +955,7 @@ namespace DirectionDetection
                             hv_Index3.Dispose();
                             HOperatorSet.AddMetrologyObjectLineMeasure(hv_MetrologyID, hv_Row + hv_OffsetLeftBottomRowBegin,
                                 hv_Column + hv_OffsetLeftBottomColumnBegin, hv_Row + hv_OffsetLeftBottomRowEnd,
-                                hv_OffsetLeftBottomColumnEnd + hv_Column, 40, 5, 1, 30, (new HTuple("measure_transition")).TupleConcat(
+                                hv_OffsetLeftBottomColumnEnd + hv_Column, 70, 5, 1, 30, (new HTuple("measure_transition")).TupleConcat(
                                 "min_score"), (new HTuple("negative")).TupleConcat(0.5), out hv_Index3);
                         }
                         ho_Contours.Dispose(); hv_MeasureRow.Dispose(); hv_MeasureColumn.Dispose();
@@ -1081,6 +1181,8 @@ namespace DirectionDetection
                                         
                                     });
                                     totalMovingNum = 0;
+                                    totalResult = null;
+
 
                                 }
                             }
@@ -1127,7 +1229,7 @@ namespace DirectionDetection
                     catch(Exception ex)
                     {
                         cameraUp.HikClose();
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("程序异常，需点击复位按钮重做！");
                         string filePath = @"example.txt";
                         
 

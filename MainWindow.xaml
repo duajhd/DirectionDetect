@@ -38,7 +38,7 @@
                 </Canvas>
                
             </Grid>
-            <UniformGrid Rows="3" Grid.Column="1">
+            <UniformGrid Rows="5" Grid.Column="1">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Width="40">行坐标</TextBlock>
                     <TextBlock x:Name="rowss" VerticalAlignment="Center"  Width="100"></TextBlock>
@@ -47,7 +47,10 @@
                     <TextBlock VerticalAlignment="Center" Width="40">列坐标</TextBlock>
                     <TextBlock x:Name="colss" VerticalAlignment="Center"  Width="100"></TextBlock>
                 </StackPanel>
-                <Button Width="100" Click="Button_Click_1" x:Name="StartingBtn" Cursor="Hand">
+              
+                <Button Width="100" Click="Button_Click_2" x:Name="InitialBtn">初始化</Button>
+                <Button Width="100" Click="Button_Click_3">复位</Button>
+                <Button Width="100" Click="Button_Click_1" x:Name="StartingBtn" Cursor="Hand" IsEnabled="False">
                     启动
                 </Button>
             </UniformGrid>

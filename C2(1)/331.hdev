@@ -51,7 +51,7 @@
 <l>OffsetLineRowEnd:=40</l>
 <l>OffsetLineColumnEnd:=129.06</l>
 <c></c>
-<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRowBegin,Column+OffsetColumnBegin,Row+OffsetRowEnd,OffsetColumnEnd+Column,40, 5, 2, 60, [], [], Index1)</l>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRowBegin,Column+OffsetColumnBegin,Row+OffsetRowEnd,OffsetColumnEnd+Column,70, 5, 2, 60, [], [], Index1)</l>
 <l>get_metrology_object_measures (Contours, MetrologyID, Index1, 'negative', MeasureRow, MeasureColumn)</l>
 <l>apply_metrology_model (img, MetrologyID)</l>
 <l>get_metrology_object_result (MetrologyID, Index1, 'all', 'result_type', 'all_param', Parameter)</l>
@@ -67,7 +67,7 @@
 <l>get_metrology_object_result_contour (LeftTopContour1, MetrologyID, Index2, 'all',1)</l>
 <l>fit_line_contour_xld (LeftTopContour1, 'tukey', -1, 0, 5, 2, LeftTopContourRow1, LeftTopContourCol1, LeftTopContourRow2, LeftTopContourCol2, Nr, Nc, Dist)</l>
 <c></c>
-<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftBottomRowBegin,Column+OffsetLeftBottomColumnBegin,Row+OffsetLeftBottomRowEnd,OffsetLeftBottomColumnEnd+Column,40, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index3)</l>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftBottomRowBegin,Column+OffsetLeftBottomColumnBegin,Row+OffsetLeftBottomRowEnd,OffsetLeftBottomColumnEnd+Column,70, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index3)</l>
 <l>get_metrology_object_measures (Contours, MetrologyID, Index3, 'negative', MeasureRow, MeasureColumn)</l>
 <l>apply_metrology_model (img, MetrologyID)</l>
 <l>get_metrology_object_result (MetrologyID, Index3, 'all', 'result_type', 'all_param', Parameter)</l>
