@@ -9,6 +9,18 @@
         Title="MainWindow" Height="450" Width="800" Unloaded="MainWindow_Unloaded">
     <Window.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"></converters:BoolToBrushConverter>
+        <!-- 定义圆形指示灯样式 -->
+        <Style TargetType="Ellipse" x:Key="IndicatorLightStyle">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="Fill" Value="Red"/>
+            <!-- 默认颜色 -->
+
+          
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,12 +43,25 @@
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition Height="200"></RowDefinition>
+                    <RowDefinition Height="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Canvas  Grid.Row="0" x:Name="DotCanvas">
 
                 </Canvas>
-               
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center"  FontSize="16" HorizontalAlignment="Left">PLC连接：</TextBlock>
+                    <Ellipse x:Name="PLCState" Style="{StaticResource IndicatorLightStyle}"
+                 IsEnabled="{Binding IsPLCConnected}" />
+                    <TextBlock FontSize="16" VerticalAlignment="Center"  HorizontalAlignment="Left">相机连接：</TextBlock>
+                    <Ellipse x:Name="CameraState" Style="{StaticResource IndicatorLightStyle}"
+                 IsEnabled="{Binding IsInsideCamerConnected}" />
+
+
+
+
+
+                </StackPanel>
+
             </Grid>
             <UniformGrid Rows="5" Grid.Column="1">
                 <StackPanel Orientation="Horizontal">

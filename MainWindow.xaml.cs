@@ -267,14 +267,33 @@ namespace DirectionDetection
             InitializeComponent();
             viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
-               cameraUp =  new HikCamera("DA6063679", ImageWidth, ImageHeight);
+            
 
             //cameraDown = new HikCamera("12345", ImageWidth, ImageHeight);
 
-            client.Connect("192.168.1.88",502);
+            try
+            {
+                client.Connect("192.168.1.88", 502);
+                PLCState.Fill = System.Windows.Media.Brushes.Green;
+            }
+            catch
+            {
+                PLCState.Fill = System.Windows.Media.Brushes.Red;
+            }
+
 
             //HikCamera vamer = new HikCamera("DA6063679", ImageWidth, ImageHeight);
-            cameraUp.HikInit();
+            try
+            {
+                cameraUp = new HikCamera("DA6063679", ImageWidth, ImageHeight);
+                cameraUp.HikInit();
+                CameraState.Fill = System.Windows.Media.Brushes.Green;  
+            }
+            catch
+            {
+                CameraState.Fill = System.Windows.Media.Brushes.Red;
+            }
+ 
             //vamer.HikAcqImage(38000, m_pBufForDriver);
            
             m_pBufForDriver = Marshal.AllocHGlobal(Convert.ToInt32(ImageWidth * ImageHeight));
@@ -1114,7 +1133,7 @@ namespace DirectionDetection
                         List<Point2D> ponits = new List<Point2D>();
                         for (int i = 0; i < rows.Length; i++)
                         {
-                            ponits.Add(new Point2D(rows[i], columns[i], mean[i] < 70 ? true : false));
+                            ponits.Add(new Point2D(rows[i], columns[i], mean[i] < 60 ? true : false));
                         }
                         //col:递增 row:相等
                         //这里相当于执行了一次矩阵转置
