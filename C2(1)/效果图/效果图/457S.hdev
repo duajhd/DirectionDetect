@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="24.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image(img,'增益10-11ms-伽马2.bmp')</l>
+<c></c>
+<l>get_image_size(img,Width,Height)</l>
+<l>create_metrology_model(MetrologyID)</l>
+<l>set_metrology_model_image_size (MetrologyID, Width, Height)</l>
+<c></c>
+<c></c>
+<l>threshold(img,reg,0,150)</l>
+<l>closing_circle(reg,connectedReg,10)</l>
+<l>connection(connectedReg,connectedReg)</l>
+<l>select_shape (connectedReg, SelectedRegions, ['area','anisometry','rb','ra'], 'and', [3000,1,150,500], [99999999,10,300,900])</l>
+<c></c>
+<c></c>
+<l>smallest_rectangle2(SelectedRegions,Row,Column,phi,Length1,Length2)</l>
+<c></c>
+<l>pi := 1.5708</l>
+<c>* 创建仿射矩阵并执行旋转</c>
+<l>hom_mat2d_identity(HomMat2D)</l>
+<c></c>
+<c></c>
+<c></c>
+<c>*右上抓边偏移</c>
+<l>OffsetRowBegin:= -300</l>
+<l>OffsetColumnBegin:=95</l>
+<l>OffsetRowEnd:=-150</l>
+<l>OffsetColumnEnd:=95</l>
+<c></c>
+<c>*左上抓边偏移</c>
+<l>OffsetLeftTopRowBegin:= -80</l>
+<l>OffsetLeftTopColumnBegin:=-155</l>
+<l>OffsetLeftTopRowEnd:=-80</l>
+<l>OffsetLeftTopColumnEnd:=-115</l>
+<c></c>
+<c>*左下抓边偏移</c>
+<l>OffsetLeftBottomRowBegin:= 300</l>
+<l>OffsetLeftBottomColumnBegin:=-90</l>
+<l>OffsetLeftBottomRowEnd:=150</l>
+<l>OffsetLeftBottomColumnEnd:=-90</l>
+<c></c>
+<c>*右下抓边偏移</c>
+<l>OffsetRightBottomRowBegin:= 80</l>
+<l>OffsetRightBottomColumnBegin:=115</l>
+<l>OffsetRightBottomRowEnd:=80</l>
+<l>OffsetRightBottomColumnEnd:=155</l>
+<c></c>
+<c></c>
+<c>*检测线偏移</c>
+<l>OffsetLineRowBegin:=-40</l>
+<l>OffsetLineColumnBegin:=195</l>
+<l>OffsetLineRowEnd:=30</l>
+<l>OffsetLineColumnEnd:=195</l>
+<c></c>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRowBegin,Column+OffsetColumnBegin,Row+OffsetRowEnd,OffsetColumnEnd+Column,70, 5, 2, 60, [], [], Index1)</l>
+<l>get_metrology_object_measures (Contours, MetrologyID, Index1, 'negative', MeasureRow, MeasureColumn)</l>
+<l>apply_metrology_model (img, MetrologyID)</l>
+<l>get_metrology_object_result (MetrologyID, Index1, 'all', 'result_type', 'all_param', Parameter)</l>
+<l>get_metrology_object_result_contour (RightTopContour1, MetrologyID, Index1, 'all',1)</l>
+<l>fit_line_contour_xld (RightTopContour1, 'tukey', -1, 0, 5, 2, RightTopContourRow1, RightTopContourCol1, RightTopContourRow2, RightTopContourCol2, Nr, Nc, Dist)</l>
+<c>*[208, 137, 213, 90], [49, 327, 139, 307], [100, 201, 214, 89], [82, 318, 56, 375]</c>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftTopRowBegin,Column+OffsetLeftTopColumnBegin,Row+OffsetLeftTopRowEnd,OffsetLeftTopColumnEnd+Column,90, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index2)</l>
+<c></c>
+<l>*add_metrology_object_line_measure(MetrologyID,213,139,214,56,90, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index2)</l>
+<l>get_metrology_object_measures (Contours, MetrologyID, Index2, 'negative', MeasureRow, MeasureColumn)</l>
+<l>apply_metrology_model (img, MetrologyID)</l>
+<l>get_metrology_object_result (MetrologyID, Index2, 'all', 'result_type', 'all_param', Parameter)</l>
+<l>get_metrology_object_result_contour (LeftTopContour1, MetrologyID, Index2, 'all',1)</l>
+<l>fit_line_contour_xld (LeftTopContour1, 'tukey', -1, 0, 5, 2, LeftTopContourRow1, LeftTopContourCol1, LeftTopContourRow2, LeftTopContourCol2, Nr, Nc, Dist)</l>
+<c></c>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetLeftBottomRowBegin,Column+OffsetLeftBottomColumnBegin,Row+OffsetLeftBottomRowEnd,OffsetLeftBottomColumnEnd+Column,70, 5, 1, 30, ['measure_transition', 'min_score'], ['negative', 0.5], Index3)</l>
+<l>get_metrology_object_measures (Contours, MetrologyID, Index3, 'negative', MeasureRow, MeasureColumn)</l>
+<l>apply_metrology_model (img, MetrologyID)</l>
+<l>get_metrology_object_result (MetrologyID, Index3, 'all', 'result_type', 'all_param', Parameter)</l>
+<l>get_metrology_object_result_contour (LeftBottomContour1, MetrologyID, Index3, 'all',1)</l>
+<l>fit_line_contour_xld (LeftBottomContour1, 'tukey', -1, 0, 5, 2, LeftBottomContourRow1, LeftBottomContourCol1, LeftBottomContourRow2, LeftBottomContourCol2, Nr, Nc, Dist)</l>
+<c></c>
+<l>add_metrology_object_line_measure(MetrologyID,Row+OffsetRightBottomRowBegin,Column+OffsetRightBottomColumnBegin,Row+OffsetRightBottomRowEnd,OffsetRightBottomColumnEnd+Column,90, 5, 2, 60, [], [], Index4)</l>
+<l>get_metrology_object_measures (Contours, MetrologyID, Index4, 'negative', MeasureRow, MeasureColumn)</l>
+<l>apply_metrology_model (img, MetrologyID)</l>
+<l>get_metrology_object_result (MetrologyID, Index4, 'all', 'result_type', 'all_param', Parameter)</l>
+<l>get_metrology_object_result_contour (RightBottomContour1, MetrologyID, Index4, 'all',1)</l>
+<l>fit_line_contour_xld (RightBottomContour1, 'tukey', -1, 0, 5, 2, RightBottomContourRow1, RightBottomContourCol1, RightBottomContourRow2, RightBottomContourCol2, Nr, Nc, Dist)</l>
+<c></c>
+<l>Row1_mid:=(RightTopContourRow1+LeftBottomContourRow1)/2</l>
+<l>Column1_mid:=(RightTopContourCol1+LeftBottomContourCol1)/2</l>
+<c></c>
+<l>Row2_mid:=(LeftTopContourRow1+RightBottomContourRow1)/2</l>
+<l>Column2_mid:=(LeftTopContourCol1+RightBottomContourCol1)/2</l>
+<c></c>
+<l>row_start:= Row1_mid+OffsetLineRowBegin</l>
+<l>col_start:=Column1_mid+OffsetLineColumnBegin</l>
+<c></c>
+<c></c>
+<l> gen_region_line(line,Row1_mid+OffsetLineRowBegin,Column1_mid+OffsetLineColumnBegin,Row1_mid+OffsetLineRowEnd,Column1_mid+OffsetLineColumnEnd)</l>
+<c> </c>
+<l> Row_Center:=(Row1_mid+OffsetLineRowBegin+Row1_mid+OffsetLineRowEnd)/2</l>
+<c> </c>
+<l> Angle := atan2(RightTopContourRow2 - RightTopContourRow1, RightTopContourCol2 - RightTopContourCol1)</l>
+<l> Angle:=Angle - pi</l>
+<l> for index:= 0 to |Row_Center| -1 by 1</l>
+<l>     hom_mat2d_rotate(HomMat2D, Angle[index], Row_Center[index], Column1_mid[index], HomMat2DRotate)</l>
+<c>     * 应用仿射变换到点</c>
+<l>     affine_trans_point_2d(HomMat2DRotate,row_start[index], col_start[index], NewRow, NewCol)</l>
+<c></c>
+<l> endfor</l>
+<l> gen_cross_contour_xld(Crosses2, Row_Center, Column1_mid+OffsetLineColumnBegin, 12, 0)</l>
+<l> *gen_region_line(line2,Row1_mid+OffsetLineRowBegin+540,Column1_mid+OffsetLineColumnBegin,Row1_mid+OffsetLineRowEnd+540.5,Column1_mid+OffsetLineColumnEnd)</l>
+<c></c>
+<l>    reduce_domain(img,line,reducedImg)</l>
+<l>    intensity(line,img, Mean, Deviation)</l>
+<c>*</c>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+<c>* 遍历每一个轮廓</c>
+<c></c>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

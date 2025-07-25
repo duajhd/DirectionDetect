@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.2" halcon_version="24.11.1.0">
+<procedure name="main">
+<interface/>
+<body>
+<l>read_image(img,'13ms-伽马2.bmp')</l>
+<c></c>
+<c></c>
+<l>get_image_size(img,Width,Height)</l>
+<l>create_metrology_model(MetrologyID)</l>
+<l>set_metrology_model_image_size (MetrologyID, Width, Height)</l>
+<c></c>
+<c></c>
+<c></c>
+<c></c>
+</body>
+<docu id="main">
+<parameters/>
+</docu>
+</procedure>
+</hdevelop>

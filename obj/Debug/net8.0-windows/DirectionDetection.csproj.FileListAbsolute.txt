@@ -35,8 +35,6 @@ D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\NModbus.dll
 D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\System.Drawing.Common.dll
 D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\System.Private.Windows.Core.dll
 D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\Microsoft.Win32.SystemEvents.dll
-D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\halcondotnet.xml
-D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\EasyModbus.xml
 D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\System.IO.Ports.dll
 D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\runtimes\android-arm\native\libSystem.IO.Ports.Native.so
 D:\zhijain\DirectionDetection\bin\Debug\net8.0-windows\runtimes\android-arm64\native\libSystem.IO.Ports.Native.so

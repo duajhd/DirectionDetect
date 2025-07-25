@@ -25,8 +25,8 @@ namespace DirectionDetection
     public partial class MainWindow : Window
     {
         MainWindowViewModel viewModel;
-        private const int DotSize = 10;
-        private const int Spacing = 20;
+        private  int DotSize = 50;
+        private  int Spacing = 70;
 
         HikCamera cameraUp;
         ModbusClient client = new ModbusClient();
@@ -132,7 +132,17 @@ namespace DirectionDetection
                 try
                 {
                     //
-                    client.WriteSingleRegister(302, 1);
+
+                    int[] res = client.ReadHoldingRegisters(303, 1);
+                    if (res[0] != 1)
+                    {
+                        client.WriteSingleRegister(302, 1);
+                    }
+
+                    totalMovingNum = 0;
+                    totalResult = null;
+                    singleResult = null;
+                    
                     isInitialized = true;
                     StartingBtn.IsEnabled = true;
 
@@ -159,7 +169,9 @@ namespace DirectionDetection
                 //已初始化，直接返回不处理
                 isRunning = false;
                 isInitialized = false;
-               
+                StartingBtn.IsEnabled = false;
+
+                InitialBtn.Content = "初始化";
                 cameraUp.HikClose();
             }
 
@@ -208,6 +220,9 @@ namespace DirectionDetection
         //点击开始执行
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            totalMovingNum = 0;
+            totalResult = null;
+            singleResult = null;
             client.WriteSingleRegister(300, 1);
 
             //if (!isRunning)
@@ -381,36 +396,81 @@ namespace DirectionDetection
 
         }
 
+        //private void DrawDots()
+        //{
+        //    // 示例二维数组
+
+        //    DotCanvas.Children.Clear();
+
+        //    for (int row = 0; row < totalResult.GetLength(0); row++)
+        //    {
+        //        for (int col = 0; col < totalResult.GetLength(1); col++)
+        //        {
+        //            Ellipse dot = new Ellipse
+        //            {
+        //                Width = DotSize,
+        //                Height = DotSize,
+        //                Fill = totalResult[row, col].isDirectionCorrect ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red
+        //            };
+        //            Canvas.SetLeft(dot, col * Spacing);
+        //            Canvas.SetTop(dot, row * Spacing);
+
+        //            DotCanvas.Children.Add(dot);
+
+
+        //        }
+        //    }
+        //}
+
+
         private void DrawDots()
         {
-            // 示例二维数组
-            
             DotCanvas.Children.Clear();
-           
+
             for (int row = 0; row < totalResult.GetLength(0); row++)
             {
                 for (int col = 0; col < totalResult.GetLength(1); col++)
                 {
+                    // 计算位置
+                    double left = col * Spacing;
+                    double top = row * Spacing;
+
+                    // 创建圆点
                     Ellipse dot = new Ellipse
                     {
                         Width = DotSize,
                         Height = DotSize,
                         Fill = totalResult[row, col].isDirectionCorrect ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red
                     };
-                    Canvas.SetLeft(dot, col * Spacing);
-                    Canvas.SetTop(dot, row * Spacing);
-                  
+                    Canvas.SetLeft(dot, left);
+                    Canvas.SetTop(dot, top);
                     DotCanvas.Children.Add(dot);
-                    //if (!data[row, col])
-                    //{
-                    //    rowss.Text = (row + 1).ToString();
-                    //    colss.Text = (col + 1).ToString();
-                    //}
 
+                    // 创建文字
+                    TextBlock text = new TextBlock
+                    {
+                        Text = $"{row+1},{col+1}",
+                        FontSize = DotSize * 0.4,  // 文字大小适应点的尺寸
+                        Foreground = System.Windows.Media.Brushes.White,
+                        Width = DotSize,
+                        Height = DotSize,
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+
+                    // 手动定位文字（WPF 的 Canvas 不能自动居中对齐，所以手动偏移）
+                    Canvas.SetLeft(text, left);
+                    Canvas.SetTop(text, top + (DotSize - text.FontSize) / 2 - 1); // 微调垂直对齐
+                    DotCanvas.Children.Add(text);
                 }
             }
         }
 
+        //if (!data[row, col])
+        //{
+        //    rowss.Text = (row + 1).ToString();
+        //    colss.Text = (col + 1).ToString();
+        //}
         private void parametersetting_Click(object sender, RoutedEventArgs e)
         {
 
@@ -428,23 +488,26 @@ namespace DirectionDetection
                     case StateStep.WaitPLC:
                         //D:100 == 1为触发
                         int[] res = client.ReadHoldingRegisters(100,1);
-                        //
+                        //触发信号且已经处理完成
                         if (res[0] == 1)
                         {
-                            int ret = cameraUp.HikAcqImage(m_pBufForDriver);
-                            if (ret == 0)
+                            //线程同步
+                            lock (obj)
                             {
-                                //线程同步
-                                lock (obj)
+                                if (!isUpdate)
                                 {
-                                    HOperatorSet.GenImage1(out ho_img, "byte", ImageWidth, ImageHeight, m_pBufForDriver);
-                                  
-                                    isUpdate = true;
-                                    //触发完成信号
-                                    client.WriteSingleRegister(200, 1);
-                                }
+                                    int ret = cameraUp.HikAcqImage(m_pBufForDriver);
+                                    if (ret == 0)
+                                    {
+                                      
+                                        isUpdate = true;
+                                        //触发完成信号
+                                        client.WriteSingleRegister(200, 1);
 
+                                    }
+                                }
                             }
+                           
 
 
                         }
@@ -554,7 +617,7 @@ namespace DirectionDetection
             return result;
         }
 
-
+        //王世昌
         // 辅助方法：克隆一个二维数组
         private static Point2D[,] ClonePoint2DArray(Point2D[,] source)
         {
@@ -888,6 +951,11 @@ namespace DirectionDetection
                 lock (obj)
                 {
                     _isUpdate = isUpdate;
+                    if (_isUpdate)
+                    {
+                        HOperatorSet.GenImage1(out ho_img, "byte", ImageWidth, ImageHeight, m_pBufForDriver);
+                    }
+                  
                 }
                
                 //未更新跳出本次循环
@@ -897,7 +965,7 @@ namespace DirectionDetection
                     continue;
                 }
                 else
-                {
+                {//这里可能会切换线程导致totalMovingNum与图中对不上，确定有更新再加1才可以
                     totalMovingNum += 1;
                     try
                     {
@@ -1133,7 +1201,7 @@ namespace DirectionDetection
                         List<Point2D> ponits = new List<Point2D>();
                         for (int i = 0; i < rows.Length; i++)
                         {
-                            ponits.Add(new Point2D(rows[i], columns[i], mean[i] < 60 ? true : false));
+                            ponits.Add(new Point2D(rows[i], columns[i], mean[i] <= 66 ? true : false));
                         }
                         //col:递增 row:相等
                         //这里相当于执行了一次矩阵转置
@@ -1216,12 +1284,12 @@ namespace DirectionDetection
 
 
                         }
-                       
 
 
 
 
-                      
+
+
 
 
 
@@ -1244,11 +1312,16 @@ namespace DirectionDetection
                         //
 
                         //处理
+
+                        lock (obj)
+                        {
+                            isUpdate = false;
+                        }
                     }
                     catch(Exception ex)
                     {
                         cameraUp.HikClose();
-                        MessageBox.Show("程序异常，需点击复位按钮重做！");
+                        MessageBox.Show($"{ex.Message}程序异常，需点击复位按钮重做！");
                         string filePath = @"example.txt";
                         
 
@@ -1258,21 +1331,14 @@ namespace DirectionDetection
 
                         HOperatorSet.WriteImage(ho_img, "bmp", 0, "error.bmp");
                     }
-                    finally
-                    {
-                        lock (obj)
-                        {
-                            isUpdate = false;
-                        }
-                    }
-
+                 
                     //HOperatorSet.WriteImage();
                    
 
                     //处理结束，恢复为未更新状态
                   
                 }
-                Thread.Sleep(200);
+                Thread.Sleep(50);
 
             }
         }
