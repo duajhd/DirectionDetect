@@ -171,7 +171,7 @@ namespace DirectionDetection
                 isInitialized = false;
                 StartingBtn.IsEnabled = false;
 
-                InitialBtn.Content = "初始化";
+                InitialBtn.Content = "初化";
                 cameraUp.HikClose();
             }
 

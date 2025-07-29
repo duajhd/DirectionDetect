@@ -7,16 +7,20 @@
       "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\directiondetection.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:directiondetection.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\directiondetection.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:directiondetection.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\camera\\mvcamera2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:camera\\mvcamera2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\directiondetection.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:directiondetection.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -40,10 +44,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\shared\\hc_smart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:shared\\hc_smart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\directiondetection.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|solutionrelative:directiondetection.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5F35893C-75FA-4EDF-AF5B-758A56009F5F}|DirectionDetection.csproj|d:\\zhijain\\directiondetection\\viewmodels\\parametersettingviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -124,19 +124,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MVCamera2.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\Camera\\MVCamera2.cs",
               "RelativeDocumentMoniker": "Camera\\MVCamera2.cs",
               "ToolTip": "D:\\zhijain\\DirectionDetection\\Camera\\MVCamera2.cs",
               "RelativeToolTip": "Camera\\MVCamera2.cs",
-              "ViewState": "AgIAAKMAAAAAAAAAAAAIwLIAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAWwBkBAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T05:31:20.194Z"
+              "WhenOpened": "2025-05-21T05:31:20.194Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "HikCamera.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\Shared\\HikCamera.cs",
               "RelativeDocumentMoniker": "Shared\\HikCamera.cs",
@@ -148,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
@@ -165,14 +166,14 @@
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
               "ToolTip": "D:\\zhijain\\DirectionDetection\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAAOQEAAAAAAAAAAASwPMEAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAIkAAAAAAAAAAAAtwKAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T08:21:04.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "XamlReader.cs",
               "DocumentMoniker": "C:\\Users\\\u8521\u660E\\AppData\\Local\\Temp\\.vsdbgsrc\\07562dd9ba86a0a5fead5117dd68e3c724f52eea01f79d4441c442c042cad972\\XamlReader.cs",
               "ToolTip": "C:\\Users\\\u8521\u660E\\AppData\\Local\\Temp\\.vsdbgsrc\\07562dd9ba86a0a5fead5117dd68e3c724f52eea01f79d4441c442c042cad972\\XamlReader.cs",
@@ -182,7 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "MainWindowViewModel.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\MainWindowViewModel.cs",
               "RelativeDocumentMoniker": "MainWindowViewModel.cs",
@@ -194,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ParameterSetting.xaml.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\Views\\ParameterSetting.xaml.cs",
               "RelativeDocumentMoniker": "Views\\ParameterSetting.xaml.cs",
@@ -218,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "CommonType.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\Shared\\CommonType.cs",
               "RelativeDocumentMoniker": "Shared\\CommonType.cs",
@@ -230,7 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "HC_SMART.cs",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\Shared\\HC_SMART.cs",
               "RelativeDocumentMoniker": "Shared\\HC_SMART.cs",
@@ -254,18 +255,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "DirectionDetection",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\DirectionDetection.csproj",
               "RelativeDocumentMoniker": "DirectionDetection.csproj",
               "ToolTip": "D:\\zhijain\\DirectionDetection\\DirectionDetection.csproj",
               "RelativeToolTip": "DirectionDetection.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-04T00:56:15.173Z"
+              "WhenOpened": "2025-07-04T00:56:15.173Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "DirectionDetection.csproj",
               "DocumentMoniker": "D:\\zhijain\\DirectionDetection\\DirectionDetection.csproj",
               "RelativeDocumentMoniker": "DirectionDetection.csproj",
@@ -273,7 +275,8 @@
               "RelativeToolTip": "DirectionDetection.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-20T08:48:10.759Z"
+              "WhenOpened": "2025-05-20T08:48:10.759Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
